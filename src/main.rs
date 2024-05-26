@@ -1,23 +1,14 @@
-// struct Emp {
-//     id: i8
-// }
-
-// impl Emp {
-//     fn set_some(id: i8) -> Self {
-//         Self {
-//             id
-//         }
-//     }
-//     fn show_id(&self) {
-//         println!("{}", self.id)
-//     }
-    
-// }
-
+use std::io::{self, Write};
 
 fn main() {
-    // Emp::set_some(2).show_id();
-    let roman = String::from("MCMXCIV");
+    print!("Please enter some input: ");
+    io::stdout().flush().unwrap();
+    let mut input = String::new();
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Unable to read the input");
+
+    let roman: String = input.trim().to_owned();
     let mut result: i32 = 0;
     let mut prev_value: i32 = 0;
     fn get_roman_value(current_roman: char) -> i32 {
@@ -29,7 +20,7 @@ fn main() {
             'C' => 100,
             'D' => 500,
             'M' => 1000,
-            _ => 0
+            _ => panic!("Invalid roman numeral")
         }
     }
     for curr_roman in roman.chars().rev() {
